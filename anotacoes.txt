@@ -1,0 +1,9 @@
+AULA 10
+
+FIXED - TOP
+STICK - RIGHT
+RELATIVE - BOTTOM
+ABSOLUTE - LEFT
+
+1 - Todo elemento absolute ira procurar o elemento relativo mais próximo.
+2 - O body sempre recebe o position relative.
