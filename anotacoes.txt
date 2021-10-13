@@ -1,9 +1,19 @@
-AULA 10
+DESAFIO 1
 
-FIXED - TOP
-STICK - RIGHT
-RELATIVE - BOTTOM
-ABSOLUTE - LEFT
+CORES :
+#212121
+#F9A825
 
-1 - Todo elemento absolute ira procurar o elemento relativo mais próximo.
-2 - O body sempre recebe o position relative.
+FONTE: HELVETICA
+
+ALTURA CABEÇALHO - 40PX
+ALTURA RODAPE - 80PX
+
+DASAFIO 2
+
+FONTE - VERDANA
+ALTURA CABEÇALHO - 200PX
+CORES:
+#2196F3
+#3D5AFE
+#0D47A1
