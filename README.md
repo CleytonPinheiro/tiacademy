@@ -2,7 +2,9 @@
 
 ## 🔖 Sobre
 
----
+Na branch main estão as atividades das aulas.
+
+Na branch desafios estão os desafios passados no final de cada módulo em suas respectivas pastas. (Essa branch está como default do git não necessitando de mudá-lo de branch para acessar o desafios).
 
 # [I][n][d][i][c][e]
 
@@ -10,8 +12,6 @@
   - [🚀 Tecnologias utilizadas](#-tecnologias-utilizadas)
   - [🎓 Quem ministrou?](#-quem-ministrou)
   - [🗂 Como baixar o projeto e rodar o projeto com docker (sem usar o XAMP e afins)](#-como-baixar-o-projeto-e-rodar-o-projeto-com-docker-sem-usar-o-xamp-e-afins)
-
----
 
 ## 🚀 Tecnologias utilizadas
 
