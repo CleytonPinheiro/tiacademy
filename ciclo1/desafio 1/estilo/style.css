@@ -4,18 +4,21 @@
   box-sizing: border-box;
 }
 
-p {
-  font-family: var(--fonte-padrao);
-  padding-right: 30px;
-  border-right: dashed;
-}
-
 :root {
   font-size: 100%;
   --cor-primaria: #212121;
   --cor-secundaria: #f9a825;
   --fonte-padrao: helvetica;
   --cor-fonte: #eceff1;
+}
+
+#text-main {
+  border-right: dashed;
+}
+
+p {
+  font-family: var(--fonte-padrao);
+  padding-right: 30px;
 }
 
 main.flex div {
