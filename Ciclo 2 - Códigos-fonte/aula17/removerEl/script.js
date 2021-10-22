@@ -1,13 +1,13 @@
-window.onload = function(){
+window.onload = function () {
 
    //calcular
-   function calcular( idProduto, resultado){
+   function calcular(idProduto, resultado) {
 
-      const preco          = document.querySelectorAll(`#${idProduto} > li`);
+      const preco = document.querySelectorAll(`#${idProduto} > li`);
       const valorResultado = document.querySelector(`#${resultado}`);
-      let totalzinho=0;
+      let totalzinho = 0;
 
-      for( let i of preco ){
+      for (let i of preco) {
          totalzinho += Number(i.dataset.preco);
          //console.log( i.dataset.preco)
       }
@@ -16,25 +16,24 @@ window.onload = function(){
 
 
    }
-   
-   function removerProdutos(id){
+
+   function removerProdutos(id) {
 
       const lista = document.querySelectorAll(`#${id} > li`);
 
-      for(let produto of lista){
+      for (let produto of lista) {
 
-             produto.addEventListener('click',function(){
-             produto.remove();
-             calcular('produtos','Somatotal');
+         produto.addEventListener('click', function () {
+            produto.remove();
+            calcular('produtos', 'Somatotal');
 
-             });
+         });
       }
 
    }
 
    removerProdutos('produtos');
-   calcular('produtos','Somatotal');
-
+   calcular('produtos', 'Somatotal');
 }
 
 
