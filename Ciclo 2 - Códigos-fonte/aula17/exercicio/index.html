@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício </title>
+</head>
+<script>
+window.onload = function(){
+
+        const valor1 = document.querySelector("#v1");
+        const valor2 = document.querySelector("#v2");
+        const total =  document.querySelector("#v3");
+
+        valor2.addEventListener('blur',function(){
+            total.value = Number(valor1.value) + Number(valor2.value);
+        })
+
+}
+</script>
+<body>
+
+   <input type="text" data-teste='10' name="" id="v1"> 
+   <input type="text" name="" id="v2"> 
+   <input type="text" name="" id="v3" disabled> 
+    
+</body>
+</html>

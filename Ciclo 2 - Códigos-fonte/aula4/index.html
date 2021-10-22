@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AULA 4 - [CONTROLE DE FLUXO OU CONDICIONANTES]</title>
+</head>
+<script>
+ //  estrutura if
+  
+var ano = 2000;
+ //se ano for diferente de 2021;
+ //   if (ano != 2021){
+ //       console.log("O valor de ano é diferente de 2021");
+ //   }
+if(ano >= 2022) {
+    if (ano == 2022){
+        console.log("O ano é IGUAL a 2022");
+    } else {
+        console.log ("O ano é MAIOR 2022")
+    }
+    //;
+} else {
+    console.log ("O anO É MENOR 2022");
+}
+
+//  console.log("fim");
+
+// opera dor OU ||
+
+// var a = 0;
+// var b = 0;
+// var c = 0
+
+// if ( a == 2 || b == 2 || c==2 ){
+//         console.log("Estou no primeiro fluxo");
+// } else {
+//     console.log("Estou no segundo fluxo");
+// }
+
+
+var x = 8;
+var y = 8;
+
+// if( x == 3 && y == 3 ){
+//     console.log("Estou no primemiro fluxo do AND");
+// } else {
+//     console.log("Estou no segundo fluxo do AND");
+// }
+
+
+// if( x != y){
+//     console.log("X é diferente de Y");
+// } else {
+//     console.log("X é igual a Y");
+// }
+
+x = 5;
+
+switch( x ) {
+    case 1: console.log("Executando a tarefa 1");
+    break;
+
+    case 2: console.log("Executando a tarefa 2");
+    break;
+
+    case 8: console.log("Executando a tarefa 3");
+    break;
+
+    case 5: 
+        var r=3;
+        var resultado = r + x;
+        console.log(resultado);
+        if(resultado > 3){
+            console.log("valor aceitável");
+        } else {
+            console.log("valor não aceitável");
+        }
+        console.log("Fim da operação");
+    break;
+
+    default: console.log("Esta opção não existe");
+    break;
+}
+
+var teste;
+ console.log(teste);
+
+</script>
+<body>
+    
+</body>
+</html>

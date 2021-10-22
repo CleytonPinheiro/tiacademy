@@ -1,0 +1,12 @@
+1. Qual é a diferença entre as declarações de variáveis var, let e const? 
+A principal diferença é o escopo onde elas são declaradas. 
+
+
+2. É verdade que o uso de parâmetros em funções é obrigatório? 
+Não é verdade!
+
+3. Selecione a opção verdadeira para inserir um arquivo js em um documento HTML:
+a) <link src=”nomeDoArquivo.js”></link>
+b) <meta src=”nomeDoArquivo.js”></meta>
+C) <script src=”nomeDoArquivo.js”></script>
+d) <a href=”nomeDoArquivo.js”></a>   

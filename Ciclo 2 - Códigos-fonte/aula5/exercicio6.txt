@@ -1,0 +1,8 @@
+1. Crie um algorítimo que verifique se o valor de uma determinada variável
+é maior ou menor que o número 10.
+ 
+a) Se o valor da variável for maior que 10, imprimir no console: 
+	'Valor maior que 10'
+
+b) Se for menor que 10, imprimir no console:
+	'Valor menor que 10'  
