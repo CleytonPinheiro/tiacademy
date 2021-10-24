@@ -34,7 +34,7 @@ export function listaFrutas() {
 }
 
 function removeListaProduto(fruta) {
-  console.log(document.getElementById(fruta).remove());
+  document.getElementById(fruta).remove();
 }
 function adicionarCesta(fruta, preco) {
   let liCesta = document.createElement("li");
