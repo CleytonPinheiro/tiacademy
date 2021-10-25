@@ -28,6 +28,14 @@ export function listaFrutas() {
         adicionarCesta(fruta.descricao, fruta.preco);
         valorTotal += fruta.preco;
         somaTotal.value = Number(valorTotal.toFixed(2));
+
+        if (ulFrutas.innerHTML == "") {
+          exibeMensagemFruta();
+        }
+
+        if (ulCesta.innerHTML != "") {
+          document.getElementById("span").remove();
+        }
       }
     });
   });
@@ -36,8 +44,25 @@ export function listaFrutas() {
 function removeListaProduto(fruta) {
   document.getElementById(fruta).remove();
 }
+
 function adicionarCesta(fruta, preco) {
   let liCesta = document.createElement("li");
 
   ulCesta.appendChild(liCesta).textContent = fruta.concat(" " + preco);
+}
+
+export function exibeMensagemCesta() {
+  let mensagem = document.createElement("span");
+
+  ulCesta.appendChild(mensagem).setAttribute("id", "span");
+
+  ulCesta.appendChild(mensagem).textContent =
+    "Não existem frutas em sua cesta mas poderá adicionar clicando no item da lista.";
+}
+
+function exibeMensagemFruta() {
+  let mensagem = document.createElement("span");
+
+  ulFrutas.appendChild(mensagem).textContent =
+    "Não existem frutas a serem exibidas.";
 }

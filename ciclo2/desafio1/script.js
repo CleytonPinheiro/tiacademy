@@ -1,3 +1,4 @@
-import { listaFrutas } from "./util.js";
+import { listaFrutas, exibeMensagemCesta } from "./util.js";
 
 listaFrutas();
+exibeMensagemCesta();
