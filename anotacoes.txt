@@ -1,9 +1,10 @@
-AULA 10
+CICLO 3  - 
 
-FIXED - TOP
-STICK - RIGHT
-RELATIVE - BOTTOM
-ABSOLUTE - LEFT
+1- NPM INIT
+npm install express --save
+npm install cors
+npm install --save sequelize
+ npm install --save mysql2
+ npm install --save-dev sequelize-cli
+ npx sequelize-cli init /* Cria estrutura para o db
 
-1 - Todo elemento absolute ira procurar o elemento relativo mais próximo.
-2 - O body sempre recebe o position relative.
