@@ -8,3 +8,7 @@ npm install --save sequelize
  npm install --save-dev sequelize-cli
  npx sequelize-cli init /* Cria estrutura para o db
 
+ Criando model e migration:
+
+ npx sequelize-cli model:generate --name User --attributes firstName:string,lastName:string,email:string
+
