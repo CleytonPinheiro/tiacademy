@@ -12,3 +12,10 @@ npm install --save sequelize
 
  npx sequelize-cli model:generate --name User --attributes firstName:string,lastName:string,email:string
 
+#RUNNING MIGRATIONS
+
+npx sequelize-cli db:migrate
+
+ALTER USER 'root'@'localhost' IDENTIFIED WITH caching_sha2_password BY 'root';
+
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';

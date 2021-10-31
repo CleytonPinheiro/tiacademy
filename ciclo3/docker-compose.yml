@@ -1,41 +1,17 @@
-version: "3"
+version: "3.1"
 
 services:
-  nodejs:
-    image: nodejs
-    container_name: nodejs
-    restart: unless-stopped
-    environment:
-      - MONGO_USERNAME=$MONGO_USERNAME
-      - MONGO_PASSWORD=$MONGO_PASSWORD
-      - MONGO_HOSTNAME=db
-      - MONGO_PORT=$MONGO_PORT
-      - MONGO_DB=$MONGO_DB
-    ports:
-      - "80:8080"
-    volumes:
-      - .:/home/node/app
-      - node_modules:/home/node/app/node_modules
-    networks:
-      - app-network
-    command: ./wait-for.sh db:27017 -- /home/node/app/node_modules/.bin/nodemon app.js
-
   db:
-    image: mongo:4.1.8-xenial
-    container_name: db
-    restart: unless-stopped
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=$MONGO_USERNAME
-      - MONGO_INITDB_ROOT_PASSWORD=$MONGO_PASSWORD
-    volumes:
-      - dbdata:/data/db
-    networks:
-      - app-network
+      MYSQL_ROOT_PASSWORD: root
 
-networks:
-  app-network:
-    driver: bridge
-
-volumes:
-  dbdata:
-  node_modules:
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 80:80
+    environment:
+      - PMA_ARBITRARY=1
