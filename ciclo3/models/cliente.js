@@ -17,7 +17,8 @@ module.exports = (sequelize, DataTypes) => {
       endereco: DataTypes.STRING,
       cidade: DataTypes.STRING,
       uf: DataTypes.STRING,
-      nascimento: DataTypes.DATEONLY,
+      nascimetno: DataTypes.DATEONLY,
+      clienteDesde: DataTypes.DATEONLY,
     },
     {
       sequelize,

@@ -14,6 +14,8 @@ module.exports = (sequelize, DataTypes) => {
   }
   Itempedido.init(
     {
+      PedidoId: DataTypes.INTEGER,
+      ServicoId: DataTypes.INTEGER,
       quantidade: DataTypes.INTEGER,
       valor: DataTypes.FLOAT,
     },
