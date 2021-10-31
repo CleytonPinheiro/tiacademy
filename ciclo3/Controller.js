@@ -9,10 +9,22 @@ app.use(express.json());
 
 let cliente = models.Cliente;
 let pedido = models.Pedido;
-let itemPedido = models.Itempedido;
+let itemPedido = models.ItemPedido;
 let servico = models.Servico;
 
-app.post("/itempedido", async (req, res) => {
+app.get("/listaservicos", async (req, res) => {
+  await servico
+    .findAll({
+      raw: true,
+    })
+    .then(function (servicos) {
+      res.json({
+        servicos,
+      });
+    });
+});
+
+app.post("/itenspedido", async (req, res) => {
   await itemPedido
     .create(req.body)
     .then(function () {
