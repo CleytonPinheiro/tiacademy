@@ -1,7 +1,10 @@
 const express = require("express");
 const cors = require("cors");
 
+const { Sequelize } = require("./models");
+
 const models = require("./models");
+const itempedido = require("./models/itempedido");
 
 const app = express();
 app.use(cors());
@@ -11,6 +14,54 @@ let cliente = models.Cliente;
 let pedido = models.Pedido;
 let itemPedido = models.ItemPedido;
 let servico = models.Servico;
+
+app.put("/pedidos/:id/editaritem", async (req, res) => {
+  const item = {
+    quantidade: req.body.quantidade,
+    valor: req.body.valor,
+  };
+  if (!(await pedido.findByPk(req.params.id))) {
+    return res.status(400).json({
+      error: true,
+      message: "Pedido não encontrado.",
+    });
+  }
+  if (!(await servico.findByPk(req.body.ServicoId))) {
+    return res.status(400).json({
+      error: true,
+      message: "Serviço não encontrado.",
+    });
+  }
+
+  await itempedido
+    .update(item, {
+      where: Sequelize.and(
+        { ServicoId: req.body.ServicoId },
+        { PedidoId: req.params.id }
+      ),
+    })
+    .then(function (itens) {
+      return res.json({
+        error: false,
+        message: "Pedido alterado com sucesso.",
+        itens,
+      });
+    })
+    .catch(function (erro) {
+      return res.status(400).json({
+        error: true,
+        message: "Erro ao alterar o item.",
+      });
+    });
+});
+
+app.get("/pedidos/:id", async (req, res) => {
+  await pedido
+    .findByPk(req.params.id, { include: [{ all: true }] })
+    .then((ped) => {
+      return res.json({ ped });
+    });
+});
 
 app.put("/atualizaservico", async (req, res) => {
   await servico
