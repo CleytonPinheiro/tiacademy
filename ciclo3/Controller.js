@@ -12,6 +12,25 @@ let pedido = models.Pedido;
 let itemPedido = models.ItemPedido;
 let servico = models.Servico;
 
+app.put("/atualizaservico", async (req, res) => {
+  await servico
+    .update(req.body, {
+      where: { id: req.body.id },
+    })
+    .then(function () {
+      return res.json({
+        error: false,
+        message: "Serviço atualizado com sucesso!",
+      });
+    })
+    .catch(function (erro) {
+      return res.status(400).json({
+        error: true,
+        message: "Erro ao atualizado o serviço.",
+      });
+    });
+});
+
 app.get("/clientes/:id", async (req, res) => {
   await cliente
     .findByPk(req.params.id)
