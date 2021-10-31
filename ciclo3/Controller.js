@@ -15,6 +15,25 @@ let pedido = models.Pedido;
 let itemPedido = models.ItemPedido;
 let servico = models.Servico;
 
+app.delete("/cliente/:id/deleta", async (req, res) => {
+  await cliente
+    .destroy({
+      where: { id: req.params.id },
+    })
+    .then(function () {
+      return res.json({
+        error: false,
+        message: "Cliente excluído com sucesso.",
+      });
+    })
+    .catch(function (erro) {
+      return res.status(400).json({
+        error: true,
+        message: "Erro ao excluir o cliente.",
+      });
+    });
+});
+
 app.put("/pedidos/:id/editaritem", async (req, res) => {
   const item = {
     quantidade: req.body.quantidade,
@@ -33,13 +52,12 @@ app.put("/pedidos/:id/editaritem", async (req, res) => {
     });
   }
 
+  let selector = {
+    where: { ServicoId: req.body.ServicoId, PedidoId: req.params.id },
+  };
+
   await itempedido
-    .update(item, {
-      where: Sequelize.and(
-        { ServicoId: req.body.ServicoId },
-        { PedidoId: req.params.id }
-      ),
-    })
+    .update(item, selector)
     .then(function (itens) {
       return res.json({
         error: false,
