@@ -12,16 +12,70 @@ let pedido = models.Pedido;
 let itemPedido = models.ItemPedido;
 let servico = models.Servico;
 
+app.get("/clientes/:id", async (req, res) => {
+  await cliente
+    .findByPk(req.params.id)
+    .then((client) => {
+      return res.json({
+        error: false,
+        client,
+      });
+    })
+    .catch(function (erro) {
+      return res.status(400).json({
+        error: true,
+        message: "Erro: Não conectado.",
+      });
+    });
+});
+
+app.get("/clientes", async (req, res) => {
+  await cliente
+    .findAll({
+      //raw: true,
+      order: [["nome", "ASC"]],
+    })
+    .then(function (clientes) {
+      res.json({
+        clientes,
+      });
+    });
+});
+
 app.get("/listaservicos", async (req, res) => {
   await servico
     .findAll({
-      raw: true,
+      //raw: true,
+      order: [["nome", "ASC"]],
     })
     .then(function (servicos) {
       res.json({
         servicos,
       });
     });
+});
+
+app.get("/servico/:id", async (req, res) => {
+  await servico
+    .findByPk(req.params.id)
+    .then((serv) => {
+      return res.json({
+        error: false,
+        serv,
+      });
+    })
+    .catch(function (erro) {
+      return res.status(400).json({
+        error: true,
+        message: "Erro: Não conectado.",
+      });
+    });
+});
+
+app.get("/ofertaservico", async (req, res) => {
+  await servico.count("id").then(function (servicos) {
+    res.json({ servicos });
+  });
 });
 
 app.post("/itenspedido", async (req, res) => {
