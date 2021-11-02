@@ -19,6 +19,99 @@ let produto = models.Produto;
 let itemCompra = models.ItemCompra;
 let compra = models.Compra;
 
+app.put("/produtos/:id/editarproduto", async (req, res) => {
+  const item = {
+    nome: req.body.nome,
+    descricao: req.body.descricao,
+  };
+
+  await produto
+    .update(item, {
+      where: { id: req.params.id },
+    })
+    .then(function (itens) {
+      return res.json({
+        error: false,
+        message: "Produto alterado com sucesso.",
+        itens,
+      });
+    })
+    .catch(function (erro) {
+      return res.status(400).json({
+        error: erro,
+        message: "Erro ao alterar o produto.",
+      });
+    });
+});
+
+app.put("/compras/:id/editarcompra", async (req, res) => {
+  const item = {
+    data: new Date(),
+  };
+
+  if (await cliente.findByPk(req.body.clienteId)) {
+    return res.status(400).json({
+      error: true,
+      message: "Cliente não encontrado.",
+    });
+  }
+
+  await compra
+    .update(item, {
+      where: { id: req.params.id },
+    })
+    .then(function (itens) {
+      return res.json({
+        error: false,
+        message: "Compra alterado com sucesso.",
+        itens,
+      });
+    })
+    .catch(function (erro) {
+      return res.status(400).json({
+        error: erro,
+        message: "Erro ao alterar a compra.",
+      });
+    });
+});
+
+app.put("/compras/:id/editaritem", async (req, res) => {
+  const item = {
+    quantidade: req.body.quantidade,
+    valor: req.body.valor,
+  };
+  if (!(await compra.findByPk(req.params.id))) {
+    return res.status(400).json({
+      error: true,
+      message: "Compra não encontrado.",
+    });
+  }
+  if (!(await produto.findByPk(req.body.ProdutoId))) {
+    return res.status(400).json({
+      error: true,
+      message: "Produto não encontrado.",
+    });
+  }
+
+  await itemCompra
+    .update(item, {
+      where: { CompraId: req.params.id, ProdutoId: req.body.ProdutoId },
+    })
+    .then(function (itens) {
+      return res.json({
+        error: false,
+        message: "Compra alterado com sucesso.",
+        itens,
+      });
+    })
+    .catch(function (erro) {
+      return res.status(400).json({
+        error: erro,
+        message: "Erro ao alterar o item compra.",
+      });
+    });
+});
+
 app.get("/itenscompra/:id", async (req, res) => {
   await itemCompra
     .findByPk(req.params.id, { include: [{ all: true }] })
@@ -131,12 +224,13 @@ app.put("/pedidos/:id/editaritem", async (req, res) => {
     });
   }
 
-  let selector = {
-    where: { ServicoId: req.body.ServicoId, PedidoId: req.params.id },
-  };
-
-  await itempedido
-    .update(item, { selector })
+  await itemPedido
+    .update(item, {
+      where: {
+        ServicoId: req.body.ServicoId,
+        PedidoId: req.params.id,
+      },
+    })
     .then(function (itens) {
       return res.json({
         error: false,
