@@ -34,44 +34,51 @@ app.delete("/cliente/:id/deleta", async (req, res) => {
     });
 });
 
-app.put("/pedidos/:id/editaritem", async (req, res) => {
-  const item = {
-    quantidade: req.body.quantidade,
-    valor: req.body.valor,
-  };
-  if (!(await pedido.findByPk(req.params.id))) {
-    return res.status(400).json({
-      error: true,
-      message: "Pedido não encontrado.",
-    });
-  }
-  if (!(await servico.findByPk(req.body.ServicoId))) {
-    return res.status(400).json({
-      error: true,
-      message: "Serviço não encontrado.",
-    });
-  }
-
-  let selector = {
-    where: { ServicoId: req.body.ServicoId, PedidoId: req.params.id },
-  };
-
-  await itempedido
-    .update(item, selector)
-    .then(function (itens) {
-      return res.json({
-        error: false,
-        message: "Pedido alterado com sucesso.",
-        itens,
-      });
-    })
-    .catch(function (erro) {
+app
+  .put("/pedidos/:id/editaritem", async (req, res) => {
+    const item = {
+      quantidade: req.body.quantidade,
+      valor: req.body.valor,
+    };
+    if (!(await pedido.findByPk(req.params.id))) {
       return res.status(400).json({
         error: true,
-        message: "Erro ao alterar o item.",
+        message: "Pedido não encontrado.",
       });
+    }
+    if (!(await servico.findByPk(req.body.ServicoId))) {
+      return res.status(400).json({
+        error: true,
+        message: "Serviço não encontrado.",
+      });
+    }
+
+    let selector = {
+      where: { ServicoId: req.body.ServicoId, PedidoId: req.params.id },
+    };
+
+    await itempedido.update(item, {
+      where: Sequelize.and(
+        {
+          ServicoId: req.body.ServicoId,
+        },
+        { PedidoId: req.params.id }
+      ),
     });
-});
+  })
+  .then(function (itens) {
+    return res.json({
+      error: false,
+      message: "Pedido alterado com sucesso.",
+      itens,
+    });
+  })
+  .catch(function (erro) {
+    return res.status(400).json({
+      error: true,
+      message: "Erro ao alterar o item.",
+    });
+  });
 
 app.get("/pedidos/:id", async (req, res) => {
   await pedido
