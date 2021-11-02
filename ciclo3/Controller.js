@@ -19,6 +19,70 @@ let produto = models.Produto;
 let itemCompra = models.ItemCompra;
 let compra = models.Compra;
 
+app.delete("/itenscompra/:id/deleta", async (req, res) => {
+  if (!(await compra.findByPk(req.params.id))) {
+    return res.status(400).json({
+      error: true,
+      message: "Compra não encontrado.",
+    });
+  }
+
+  await itemCompra
+    .destroy({
+      where: { CompraId: req.params.id },
+    })
+    .then(function () {
+      return res.json({
+        error: false,
+        message: "Item compra excluído com sucesso.",
+      });
+    })
+    .catch(function (erro) {
+      return res.status(400).json({
+        error: erro,
+        message: "Erro ao excluir o item compra.",
+      });
+    });
+});
+
+app.delete("/produtos/:id/deleta", async (req, res) => {
+  await produto
+    .destroy({
+      where: { id: req.params.id },
+    })
+    .then(function () {
+      return res.json({
+        error: false,
+        message: "Produto excluído com sucesso.",
+      });
+    })
+    .catch(function (erro) {
+      return res.status(400).json({
+        error: true,
+        message: "Erro ao excluir o produto.",
+      });
+    });
+});
+
+app.delete("/compras/:id/deleta", async (req, res) => {
+  await compra
+    .destroy({
+      where: { id: req.params.id },
+    })
+    .then(function () {
+      return res.json({
+        error: false,
+        message: "Compra exclúida com sucesso.",
+      });
+    })
+    .catch(function (erro) {
+      return res.status(400).json({
+        error: true,
+        message: "Erro ao excluir a compra.",
+      });
+    });
+});
+
 app.put("/produtos/:id/editarproduto", async (req, res) => {
   const item = {
     nome: req.body.nome,
