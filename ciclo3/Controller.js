@@ -15,6 +15,85 @@ let pedido = models.Pedido;
 let itemPedido = models.ItemPedido;
 let servico = models.Servico;
 
+let produto = models.Produto;
+let itemCompra = models.ItemCompra;
+let compra = models.Compra;
+
+app.get("/itenscompra/:id", async (req, res) => {
+  await itemCompra
+    .findByPk(req.params.id, { include: [{ all: true }] })
+    .then((item) => {
+      return res.json({ item });
+    });
+});
+
+app.post("/itenscompra", async (req, res) => {
+  await itemCompra
+    .create(req.body)
+    .then(function () {
+      return res.json({
+        error: false,
+        message: "Item compra cadastrado com sucesso.",
+      });
+    })
+    .catch(function (erro) {
+      return res.status(400).json({
+        error: true,
+        message: "Erro ao cadastrar o item compra.",
+      });
+    });
+});
+
+app.get("/produtos/:id", async (req, res) => {
+  await produto
+    .findByPk(req.params.id, { include: [{ all: true }] })
+    .then((produto) => {
+      return res.json({ produto });
+    });
+});
+
+app.post("/produtos", async (req, res) => {
+  await produto
+    .create(req.body)
+    .then(function () {
+      return res.json({
+        error: false,
+        message: "Produto cadastrado com sucesso.",
+      });
+    })
+    .catch(function (erro) {
+      return res.status(400).json({
+        error: true,
+        message: "Erro ao cadastrar o produto.",
+      });
+    });
+});
+
+app.get("/compras/:id", async (req, res) => {
+  await compra
+    .findByPk(req.params.id, { include: [{ all: true }] })
+    .then((compra) => {
+      return res.json({ compra });
+    });
+});
+
+app.post("/compras", async (req, res) => {
+  await compra
+    .create(req.body)
+    .then(function () {
+      return res.json({
+        error: false,
+        message: "Compra cadastrado com sucesso.",
+      });
+    })
+    .catch(function (erro) {
+      return res.status(400).json({
+        error: true,
+        message: "Erro ao cadastrar a compra",
+      });
+    });
+});
+
 app.delete("/cliente/:id/deleta", async (req, res) => {
   await cliente
     .destroy({
@@ -34,51 +113,44 @@ app.delete("/cliente/:id/deleta", async (req, res) => {
     });
 });
 
-app
-  .put("/pedidos/:id/editaritem", async (req, res) => {
-    const item = {
-      quantidade: req.body.quantidade,
-      valor: req.body.valor,
-    };
-    if (!(await pedido.findByPk(req.params.id))) {
-      return res.status(400).json({
-        error: true,
-        message: "Pedido não encontrado.",
-      });
-    }
-    if (!(await servico.findByPk(req.body.ServicoId))) {
-      return res.status(400).json({
-        error: true,
-        message: "Serviço não encontrado.",
-      });
-    }
-
-    let selector = {
-      where: { ServicoId: req.body.ServicoId, PedidoId: req.params.id },
-    };
-
-    await itempedido.update(item, {
-      where: Sequelize.and(
-        {
-          ServicoId: req.body.ServicoId,
-        },
-        { PedidoId: req.params.id }
-      ),
-    });
-  })
-  .then(function (itens) {
-    return res.json({
-      error: false,
-      message: "Pedido alterado com sucesso.",
-      itens,
-    });
-  })
-  .catch(function (erro) {
+app.put("/pedidos/:id/editaritem", async (req, res) => {
+  const item = {
+    quantidade: req.body.quantidade,
+    valor: req.body.valor,
+  };
+  if (!(await pedido.findByPk(req.params.id))) {
     return res.status(400).json({
       error: true,
-      message: "Erro ao alterar o item.",
+      message: "Pedido não encontrado.",
     });
-  });
+  }
+  if (!(await servico.findByPk(req.body.ServicoId))) {
+    return res.status(400).json({
+      error: true,
+      message: "Serviço não encontrado.",
+    });
+  }
+
+  let selector = {
+    where: { ServicoId: req.body.ServicoId, PedidoId: req.params.id },
+  };
+
+  await itempedido
+    .update(item, { selector })
+    .then(function (itens) {
+      return res.json({
+        error: false,
+        message: "Pedido alterado com sucesso.",
+        itens,
+      });
+    })
+    .catch(function (erro) {
+      return res.status(400).json({
+        error: true,
+        message: "Erro ao alterar o item.",
+      });
+    });
+});
 
 app.get("/pedidos/:id", async (req, res) => {
   await pedido
