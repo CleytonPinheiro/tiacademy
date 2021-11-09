@@ -18,8 +18,11 @@ npx sequelize-cli db:migrate
 
 #Desfazendo a migrate
 
-npx sequelize-cli db:migrate:undo:all
+npx sequelize-cli db:migrate:undo:al
 
-ALTER USER 'root'@'localhost' IDENTIFIED WITH caching_sha2_password BY 'root';
+#CICLO 4
 
-ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';
+Instalar react router
+
+npm install react-router-dom
+

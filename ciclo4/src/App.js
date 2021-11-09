@@ -1,11 +1,14 @@
 import "./App.css";
+import React from "react";
 import {
   BrowserRouter as Router,
-  Routes as Switch,
-  Route,
+  Switch,
+  Route
+
 } from "react-router-dom";
+
 import { Home } from "./views/Home";
-import { ListarCliente } from "./views/Cliente/lista";
+import { Listarcliente } from "./views/Cliente/lista";
 
 function App() {
   return (
@@ -13,7 +16,7 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route path="/clientes" component={ListarCliente} />
+          <Route path="/clientes" component={Listarcliente} />
         </Switch>
       </Router>
     </div>
