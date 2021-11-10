@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Home } from "./views/Home";
 import { Listarcliente } from "./views/Cliente/lista";
 import { Menu } from "./components/Menu";
+import { Listarservico } from "./views/Servico/lista";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/clientes" component={Listarcliente} />
+          <Route path="/servicos" component={Listarservico} />
         </Switch>
       </Router>
     </div>
