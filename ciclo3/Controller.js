@@ -4,7 +4,7 @@ const cors = require("cors");
 const { Sequelize } = require("./models");
 
 const models = require("./models");
-//const itempedido = require("./models/itempedido");
+const itempedido = require("./models/itempedido");
 
 const app = express();
 app.use(cors());
