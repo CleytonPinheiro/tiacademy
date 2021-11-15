@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Alert, Container, Table } from "reactstrap";
 
-import { api } from "./../../../config";
+import { api } from "../../../config";
 
 export const Listarservico = () => {
   const [data, setData] = useState([]);
