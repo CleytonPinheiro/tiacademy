@@ -2,6 +2,9 @@
 
 # dependencies
 /node_modules
+ciclo3/node_modules
+ciclo4/node_modules
+
 /.pnp
 .pnp.js
 

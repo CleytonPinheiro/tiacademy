@@ -5,7 +5,11 @@ import { Alert, Container, Table } from "reactstrap";
 
 import { api } from "../../../config";
 
-export const Listarservico = () => {
+export const Item = (props) => {
+  //console.log(props.match.params.id);
+
+  const [id, setId] = useState(props.match.params.id);
+
   const [data, setData] = useState([]);
 
   const [status, setStatus] = useState({
@@ -13,12 +17,12 @@ export const Listarservico = () => {
     mensagem: "",
   });
 
-  const getServico = async () => {
+  const getItems = async () => {
     await axios
-      .get(api + "/listaservicos")
+      .get(api + "/servico/" + id + "/pedidos")
       .then((response) => {
-        console.log(response.data.servicos);
-        setData(response.data.servicos);
+        console.log(response.data.item);
+        setData(response.data.item);
       })
       .catch((erro) => {
         setStatus({ type: "error", mensagem: " Erro:Sem conexão com a API." });
@@ -27,14 +31,14 @@ export const Listarservico = () => {
   };
 
   useEffect(() => {
-    getServico();
-  }, []);
+    getItems();
+  }, [id]);
 
   return (
     <div>
       <Container>
         <div>
-          <h1>Visualizar informações do serviço. </h1>
+          <h1>Pedidos do serviço. </h1>
         </div>
         {status.type === "error" ? (
           <Alert color="danger">{status.mensagem}</Alert>
@@ -44,21 +48,21 @@ export const Listarservico = () => {
         <Table striped>
           <thead>
             <tr>
-              <th>ID</th>
-              <th>Nome</th>
-              <th>Descrição</th>
-              <th>Ação</th>
+              <th>Pedido</th>
+              <th>Quantidade</th>
+              <th>Valor</th>
+              <th>Visualizar</th>
             </tr>
           </thead>
           <tbody>
             {data.map((item) => (
-              <tr key={item.id}>
-                <th>{item.id}</th>
-                <td>{item.nome}</td>
-                <td>{item.descricao}</td>
+              <tr key={item.ServicoId}>
+                <th>{item.PedidoId}</th>
+                <td>{item.quantidade}</td>
+                <td>{item.valor}</td>
                 <td className="text-center/">
                   <Link
-                    to={"/listar-pedido/" + item.id}
+                    to={"/listar-pedido/"}
                     className="btn btn-outline-primary btn-sm"
                   >
                     Consultar
