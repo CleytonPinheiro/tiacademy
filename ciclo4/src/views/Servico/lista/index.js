@@ -1,11 +1,16 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Container, Table } from "reactstrap";
+import { Alert, Container, Table } from "reactstrap";
 
 import { api } from "./../../../config";
 
 export const Listarservico = () => {
   const [data, setData] = useState([]);
+
+  const [status, setStatus] = useState({
+    type: "",
+    mensagem: "",
+  });
 
   const getServico = async () => {
     await axios
@@ -15,6 +20,7 @@ export const Listarservico = () => {
         setData(response.data.servicos);
       })
       .catch((erro) => {
+        setStatus({ type: "error", mensagem: " Erro:Sem conexão com a API." });
         console.log("Erro: sem conexão com a API", erro);
       });
   };
@@ -26,7 +32,14 @@ export const Listarservico = () => {
   return (
     <div>
       <Container>
-        <h1>Visualizar informações do serviço. </h1>
+        <div>
+          <h1>Visualizar informações do serviço. </h1>
+        </div>
+        {status.type === "error" ? (
+          <Alert color="danger">{status.mensagem}</Alert>
+        ) : (
+          ""
+        )}
         <Table striped>
           <thead>
             <tr>
