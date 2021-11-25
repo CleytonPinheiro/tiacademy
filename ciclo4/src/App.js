@@ -9,6 +9,7 @@ import { Listarservico } from "./views/Servico/lista";
 
 import { Item } from "./views/Servico/Item";
 import { Cadastrar } from "./views/Servico/Cadastrar";
+import { ListarPedido } from "./views/Pedido/lista";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route exact path="/" component={Home} />
           <Route path="/clientes" component={Listarcliente} />
           <Route path="/servicos" component={Listarservico} />
+          <Route path="/pedidos" component={ListarPedido} />
           <Route path="/listar-pedido/:id" component={Item} />
           <Route path="/cadastrarservicos" component={Cadastrar} />
         </Switch>

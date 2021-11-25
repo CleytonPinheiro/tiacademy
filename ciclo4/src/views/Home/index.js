@@ -5,16 +5,18 @@ export const Home = () => {
     <div>
       <Container>
         <div className="d-flex">
-          <h1> Home </h1>
+          <div className="m-auto p-2">
+            <h1> Home </h1>
+          </div>
         </div>
-        <div className="p-3">
-          <a href="/clientes" className="btn-outline-success btn-sm m-3">
+        <div className="p-2">
+          <a href="/clientes" className="btn-outline-success btn-sm">
             Cliente
           </a>
-          <a href="/clientes" className="btn-outline-success btn-sm m-3">
+          <a href="/pedidos" className="btn-outline-success btn-sm">
             Pedido
           </a>
-          <a href="/clientes" className="btn-outline-success btn-sm m-3">
+          <a href="/servicos" className="btn-outline-success btn-sm">
             Serviço
           </a>
         </div>

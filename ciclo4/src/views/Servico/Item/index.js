@@ -8,6 +8,7 @@ import { api } from "../../../config";
 export const Item = (props) => {
   //console.log(props.match.params.id);
 
+  // eslint-disable-next-line no-unused-vars
   const [id, setId] = useState(props.match.params.id);
 
   const [data, setData] = useState([]);
@@ -32,6 +33,7 @@ export const Item = (props) => {
 
   useEffect(() => {
     getItems();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   return (

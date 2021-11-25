@@ -6,6 +6,7 @@ import {
   Nav,
   NavItem,
   NavLink,
+  NavbarToggler,
   Container,
 } from "reactstrap";
 
@@ -16,12 +17,11 @@ export const Menu = (props) => {
 
   return (
     <div>
-      <Navbar color="info" expand="md" dark>
-        <Container>
-          {" "}
+      <Navbar color="info" dark expand="md">
+        <Container className="d-flex">
           <NavbarBrand href="/">TI Academy</NavbarBrand>
-          {/*  {<NavbarToggler onClick={function noRefCheck() {}} />} */}
-          <Collapse navbar>
+          <NavbarToggler onClick={toggle} />
+          <Collapse isOpen={isOpen} navbar>
             <Nav className="me-auto" navbar>
               <NavItem>
                 <NavLink href="/">Home</NavLink>
